@@ -98,8 +98,8 @@ proxy-groups:
   - {name: 🇭🇰 香港节点, type: select, include-all: true, filter: "(?=.*(港|HK|(?i)Hong))^((?!(LD|台|日|韩|新|深|美)).)*$"}
   - {name: LD1, type: select, include-all: true, filter: "(?=.*(LD|落地)^((?!()).)*$"}
   - {name: LD2, type: select, include-all: true, filter: "(?=.*(LD|落地)^((?!()).)*$"}
-  - {name: YZLD, type: fallback, include-all: true, filter: "(?=.*LD)(?=.*(?:HK|SG|JP|YZ)).*"
-  - {name: OMLD, type: fallback, include-all: true, filter: "(?=.*LD)(?=.*(?:US|EU|OM)).*"
+  - {name: YZLD, type: fallback, include-all: true, filter: "(?=.*LD)(?=.*(?:HK|SG|JP|YZ)).*"}
+  - {name: OMLD, type: fallback, include-all: true, filter: "(?=.*LD)(?=.*(?:US|EU|OM)).*"}
   - {name: 中转, type: select, proxies: [🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇲 美国节点]}    
   - {name: 故转, type: select, proxies: [🔯 香港故转, 🔯 日本故转, 🔯 狮城故转, 🔯 美国故转,♻️ 香港自动,♻️ 日本自动,♻️ 狮城自动,♻️ 美国自动]}      
   - {name: 落地1, type: select, proxies: [中转落地1, 故转落地1]}  

@@ -1,5 +1,3 @@
-# 必读！！！
-# 此配置不防DNS泄露，想使用防泄漏专业版本请使用同目录下另一个名字为mihomo的版本
 # 机场订阅
 proxy-providers:
   Airport1:
@@ -56,29 +54,151 @@ sniffer:
 tun:
   enable: true
   stack: mixed
-  dns-hijack: ["any:53", "tcp://any:53"]
+  dns-hijack: ["any:53"]
   auto-route: true
   auto-redirect: true
   auto-detect-interface: true
+  strict-route: true
 
+# DNS模块
 # DNS模块
 dns:
   enable: true
-  cache-algorithm: arc
+  listen: 0.0.0.0:1053
+  prefer-h3: false # 【关键修改1】必须关闭！防止节点UDP不通导致强制卡顿10秒等待超时
   ipv6: false
+
+  # fake-ip 模式
   enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.0/16
+  fake-ip-range: 198.18.0.1/16
   fake-ip-filter-mode: blacklist
+  # fake-ip 排除列表
   fake-ip-filter:
-    - "*"
     - "+.lan"
+    - "+.localdomain"
+    - "+.example"
+    - "+.invalid"
+    - "+.localhost"
+    - "+.test"
     - "+.local"
-    - "+.market.xiaomi.com"
+    - "+.home.arpa"
+    - "+.parsec.app"
+    - "+.parsecgaming.com"
+    - "+.parsec.io"
+    - "+.zerotier.com"
+    - "+.ztnetwork.io"
+    - "time.*"
+    - "time1.*"
+    - "time2.*"
+    - "time3.*"
+    - "time4.*"
+    - "time5.*"
+    - "time6.*"
+    - "time7.*"
+    - "+.pool.ntp.org"
+    - "+.ntp.org.cn"
+    - "music.163.com"
+    - "+.music.163.com"
+    - "+.126.net"
+    - "musicapi.taihe.com"
+    - "music.taihe.com"
+    - "songsearch.kugou.com"
+    - "trackercdn.kugou.com"
+    - "+.kuwo.cn"
+    - "api-jooxtt.sanook.com"
+    - "api.joox.com"
+    - "+.joox.com"
+    - "y.qq.com"
+    - "+.y.qq.com"
+    - "streamoc.music.tc.qq.com"
+    - "mobileoc.music.tc.qq.com"
+    - "isure.stream.qqmusic.qq.com"
+    - "dl.stream.qqmusic.qq.com"
+    - "aqqmusic.tc.qq.com"
+    - "amobile.music.tc.qq.com"
+    - "+.msftconnecttest.com"
+    - "+.msftncsi.com"
+    - "+.srv.nintendo.net"
+    - "+.n.n.srv.nintendo.net"
+    - "stun.playstation.net"
+    - "+.xboxlive.com"
+    - "xbox.*.microsoft.com"
+    - "xnotify.xboxlive.com"
+    - "+.battlenet.com.cn"
+    - "+.wotgame.cn"
+    - "+.wggames.cn"
+    - "+.wowsgame.cn"
+    - "+.wargaming.net"
+    - "proxy.golang.org"
+    - "stun.*"
+    - "+.stun.*"
+    - "heartbeat.belkin.com"
+    - "+.linksys.com"
+    - "+.linksyssmartwifi.com"
+    - "+.router.asus.com"
+    - "mesu.apple.com"
+    - "swscan.apple.com"
+    - "swquery.apple.com"
+    - "swdownload.apple.com"
+    - "swcdn.apple.com"
+    - "swdist.apple.com"
+    - "lens.l.google.com"
+    - "stun.l.google.com"
+    - "+.nflxvideo.net"
+    - "+.square-enix.com"
+    - "+.finalfantasyxiv.com"
+    - "+.ffxiv.com"
+    - "+.ff14.sdo.com"
+    - "+.teamspeak.com"
+    - "+.mcdn.bilivideo.cn"
+    - "+.media.dssott.com"
+    - "+.cmbchina.com"
+    - "+.cmbimg.com"
+    - "*.tracker.*"
+    - "*.bittorrent.*"
+    - "*.torrent.*"
+    - "*.dht.*"
+    - "*announce*"
+    - "*announce.php*"
+    - "*udp-tracker.*"
+    - "*udp-tracker.*"
+    - "tracker.*"
+    - "42235"
+    - "42236"
+    - "9993"
+  # DNS 遵循 Clash 规则
+  respect-rules: true
+
+  # 启动阶段解析DNS服务器使用 (使用纯IP，极速启动)
   default-nameserver:
     - 223.5.5.5
+    - 119.29.29.29
+
+  # 【关键修改2】代理节点解析无需加密，使用普通UDP最快，消除TLS握手延迟
+  proxy-server-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+
+  # 直连规则专属 DNS
+  direct-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
+
+  # 【关键修改3】复用你底部的 rule-providers 进行精准分流，大幅降低 CPU 匹配耗时
+  nameserver-policy:
+    "rule-set:cn_domain,private_domain":
+      - 223.5.5.5
+      - 119.29.29.29
+    "rule-set:geolocation-!cn":
+      - https://1.1.1.1/dns-query
+      - https://8.8.8.8/dns-query
+
+  # 兜底 DNS (海外防泄露核心)
+  # 使用 tcp 协议而不是 https，因为 tcp 报文会直接包裹在代理节点的加密隧道中，
+  # 既能100%防国内运营商审查，又能避免 DoH 的二次 TLS 握手，速度提升数倍。
   nameserver:
-    - https://dns.alidns.com/dns-query
-    - https://doh.pub/dns-query
+    - tcp://1.1.1.1
+    - tcp://8.8.8.8
  
 # 出站策略，根据自己情况调整每个策略里分组排序，增删都可以，比如把美国自动放到第一个，比如删除香港故转，注意别漏掉表情逗号等。
 # 如果相应分组没有筛选到对应的国家，请根据自己节点名字调整筛选关键字。

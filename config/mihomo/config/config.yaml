@@ -15,15 +15,7 @@ proxy-providers:
       
 # 节点信息
 proxies:
-  - name: "HK YZ LD"
-    dialer-proxy: 链式代理
-    type: ss
-    server: ""
-    port:
-    cipher: ""
-    password: ""
-    udp: true
-    
+  - {name: yourname, dialer-proxy: 链式代理, server: 114.5.1.4, port: 8443, type: ss, cipher: aes-256-gcm, password: 1145141919810}
   - {name: 直连, type: direct}
 
 # 全局配置 
@@ -112,7 +104,7 @@ proxy-groups:
   - {name: 其它落地故障转移, type: fallback, include-all: true, filter: "(?=.*LD)(?=.*(?:US|EU|OM)).*"}
   - {name: 中转, type: select, proxies: [🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇲 美国节点]}    
   - {name: 故转, type: select, proxies: [🔯 香港故转, 🔯 日本故转, 🔯 狮城故转, 🔯 美国故转,♻️ 香港自动,♻️ 日本自动,♻️ 狮城自动,♻️ 美国自动]}
-  - {name: 自建, type: select, include-all: true, filter: "(?=.*(ZJ|自建))"}
+  - {name: 自建, type: select, include-all: true, filter: "(?=.*(ciallo))"}
   - {name: 🇭🇰 香港节点, type: select, include-all: true, filter: "(?=.*(港|HK|(?i)Hong))^((?!(LD|台|日|韩|新|深|美)).)*$"}
   - {name: 🇯🇵 日本节点, type: select, include-all: true, filter: "(?=.*(日|JP|(?i)Japan))^((?!(LD|港|台|韩|新|美)).)*$"}
   - {name: 🇸🇬 狮城节点, type: select, include-all: true, filter: "(?=.*(新加坡|坡|狮城|SG|Singapore))^((?!(LD|台|日|韩|深|美)).)*$"}

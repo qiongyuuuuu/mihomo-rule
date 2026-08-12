@@ -43,7 +43,7 @@ external-controller: 0.0.0.0:9090
 secret: ""
 external-ui: ui
 external-ui-url: "https://gh-proxy.com/https://github.com/Zephyruso/zashboard/archive/refs/heads/gh-pages.zip"
-
+# 路由器要改成 external-ui: /etc/openclash/ui
 # 嗅探
 sniffer:
   enable: true

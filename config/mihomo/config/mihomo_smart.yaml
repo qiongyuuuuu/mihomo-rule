@@ -1,4 +1,15 @@
-# 为smart内核专门修改语法，防止报错配置
+# 为smart内核专门修改语法，防止报错配置,以及smart的配置范例：proxy-groups:
+#  - name: "🧠 智能选择"
+#    type: smart               # 策略组类型必须为 smart
+#    uselightgbm: true         # 启用 LightGBM 模型预测权重
+#    collectdata: false        # 是否收集数据用于本地模型训练（日常使用设为 false 即可）
+#    strategy: sticky-sessions # 节点选择策略：sticky-sessions（粘性会话，推荐）或 round-robin
+#    sample-rate: 1            # 采样率 (0~1)
+#    policy-priority: "HK:1.4;SG:1.3;US:1.0" # 可选：手动为某些地区/节点名称增加基础权重 multiplier
+#    proxies:
+      - 节点A
+      - 节点B
+    # 或通过 filter / include-all 自动引入节点
 proxy-providers:
   Airport1:
     url: "订阅url"

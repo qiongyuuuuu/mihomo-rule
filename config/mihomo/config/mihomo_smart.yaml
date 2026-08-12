@@ -1,15 +1,15 @@
 # 为smart内核专门修改语法，防止报错配置,以及smart的配置范例：proxy-groups:
-#  - name: "🧠 智能选择"
-#    type: smart               # 策略组类型必须为 smart
-#    uselightgbm: true         # 启用 LightGBM 模型预测权重
-#    collectdata: false        # 是否收集数据用于本地模型训练（日常使用设为 false 即可）
-#    strategy: sticky-sessions # 节点选择策略：sticky-sessions（粘性会话，推荐）或 round-robin
-#    sample-rate: 1            # 采样率 (0~1)
-#    policy-priority: "HK:1.4;SG:1.3;US:1.0" # 可选：手动为某些地区/节点名称增加基础权重 multiplier
+#  - name: "🧠 智能选择"       # 策略组名称随意
+#    type: smart               # 启用smart内核
+#    uselightgbm: true         # 启用 LightGBM 模型预测权重  以下示例配置不开lightbgm，可以自行添加
+#    collectdata: false        # 是否收集数据用于本地模型训练（日常使用建议设为 false）
+#    strategy: sticky-sessions # 节点选择策略：sticky-sessions（粘性会话，不会频繁切换确认的节点）或 round-robin（不建议 视需求选择）
+#    sample-rate: 1            # 采样率 (0~1)  电脑建议1 软路由建议0.2~0.4
+#    policy-priority: "HK:1.4;SG:1.3;US:1.0" # 可选：手动为某些地区/节点名称增加基础权重 multiplier，说白了就是每个地区更倾向于的节点倍率，用于机场倍率节点选取使用
 #    proxies:
       - 节点A
       - 节点B
-    # 或通过 filter / include-all 自动引入节点
+    # 或通过 filter / include-all 自动引入节点 下文通过filter引入
 proxy-providers:
   Airport1:
     url: "订阅url"

@@ -266,7 +266,6 @@ rules:
   - RULE-SET,cn_domain,直连
   - RULE-SET,cn_ip,直连
   - MATCH,🐟 漏网之鱼
-  - DOMAIN-SUFFIX,feimu.tv,VIDEO
 # 规则集
 ## type：可选http/file/inline  behavior：可选domain/ipcidr/classical format：可选yaml/text/mrs
 rule-anchor:

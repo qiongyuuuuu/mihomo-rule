@@ -234,8 +234,8 @@ proxy-groups:
   - {name: 自建, type: select, include-all: true, filter: "(?=.*(ciallo))"}
   - {name: 落地1, type: select, include-all: true, filter: "(?=.*(LD|落地))"}
   - {name: 落地2, type: select, include-all: true, filter: "(?=.*(LD|落地))"}
-  - {name: 亚太落地故障转移, type: fallback, use: [Airport1], filter: "(?=.*LD)(?=.*(?:HK|SG|JP|YZ)).*"}
-  - {name: 其它落地故障转移, type: fallback, use: [Airport1], filter: "(?=.*LD)(?=.*(?:US|EU|OM)).*"}
+  - {name: 亚太落地故障转移, type: fallback, include-all: true, filter: "(?=.*LD)(?=.*(?:HK|SG|JP|YZ)).*"}
+  - {name: 其它落地故障转移, type: fallback, include-all: true, filter: "(?=.*LD)(?=.*(?:US|EU|OM)).*"}
   - {name: 垃圾, type: select, proxies: [垃圾1, 垃圾2]}  
   - {name: 垃圾1, type: select, use: [Airport2]}
   - {name: 垃圾2, type: fallback, use: [Airport2], filter: "(?=.*(CT|电信))"}

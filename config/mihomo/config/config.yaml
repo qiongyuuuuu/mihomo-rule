@@ -222,7 +222,7 @@ proxy-groups:
   - {name: 链式特殊, type: select, proxies: [🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇲 美国节点,🔯 香港故转, 🔯 日本故转, 🔯 狮城故转, 🔯 美国故转,♻️ 香港自动,♻️ 日本自动,♻️ 狮城自动,♻️ 美国自动, 自建]}    
   - {name: 中转, type: select, proxies: [🇭🇰 香港节点, 🇯🇵 日本节点, 🇸🇬 狮城节点, 🇺🇲 美国节点]}    
   - {name: 故转, type: select, proxies: [🔯 香港故转, 🔯 日本故转, 🔯 狮城故转, 🔯 美国故转,♻️ 香港自动,♻️ 日本自动,♻️ 狮城自动,♻️ 美国自动]}
-  - {name: 自建, type: select, include-all: true, filter: "(?=.*(ciallo))"}
+  - {name: 自建, type: fallback, include-all: true, filter: "(?=.*(ciallo))"}
   - {name: 落地1, type: select, include-all: true, filter: "(?=.*(LD|落地))"}
   - {name: 落地2, type: select, include-all: true, filter: "(?=.*(LD|落地))"}
   - {name: 亚太落地故障转移, type: fallback, include-all: true, filter: "(?=.*LD)(?=.*(?:HK|SG|JP|YZ)).*"}

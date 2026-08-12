@@ -1,4 +1,29 @@
-
+# 为smart内核专门修改语法，防止报错配置
+proxy-providers:
+  Airport1:
+    url: "订阅url"
+    type: http
+    interval: 0
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
+  Airport2:
+    url: "订阅url"
+    type: http
+    interval: 0
+    health-check:
+      enable: true
+      url: https://www.gstatic.com/generate_204
+      interval: 300
+    proxy: 直连
+      
+# 节点信息
+proxies:
+  - {name: yourname, dialer-proxy: 链式代理, server: 114.5.1.4, port: 8443, type: ss, cipher: aes-256-gcm, password: 1145141919810}
+  - {name: yourname, dialer-proxy: 链式特殊, server: 11.45.1.4, port: 8443, type: ss, cipher: aes-256-gcm, password: 1145141919810}
+  - {name: 直连, type: direct}
 # 全局配置
 mixed-port: 7890
 allow-lan: true

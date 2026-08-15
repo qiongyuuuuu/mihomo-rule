@@ -68,7 +68,7 @@ sniffer:
   skip-domain:
     - "Mijia Cloud"
     - "+.push.apple.com"
-
+find-process-mode: always
 # 入站
 tun:
   enable: true

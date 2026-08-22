@@ -233,7 +233,7 @@ proxy-groups:
   - {name: 落地2, type: fallback, include-all: true, filter: "(?=.*(LD|落地))"}
   - {name: 亚太落地故障转移, type: fallback, include-all: true, filter: "(?=.*LD)(?=.*(?:HK|SG|JP|YZ)).*"}
   - {name: 其它落地故障转移, type: fallback, include-all: true, filter: "(?=.*LD)(?=.*(?:US|EU|OM)).*"}
-  - {name: CT故转1, type: smart, strategy: sticky-sessions, sample-rate: 1, use: [Airport1], filter: "(?=.*香港|HK)(?=.*(?:CT))"}
+  - {name: CT故转1, type: smart, uselightgbm: true, strategy: sticky-sessions, sample-rate: 1, use: [Airport1], filter: "(?=.*香港|HK|新加坡|SG|日本|JP|美国|US)(?=.*(?:CT))"}
   - {name: CT故转2, type: smart, strategy: sticky-sessions, sample-rate: 1, use: [Airport1], filter: "(?=.*新加坡|SG)(?=.*(?:CT))"}
   - {name: CT故转3, type: fallback, interval: 300, proxies: [🔯 香港故转, 🔯 日本故转, 🔯 狮城故转, 🔯 美国故转]}
   - {name: 🇭🇰 香港节点, type: select, use: [Airport1], filter: "(?=.*(港|HK|(?i)Hong))^((?!(LD|台|日|韩|新|深|美)).)*$"}
